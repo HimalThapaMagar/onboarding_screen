@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:onboarding_screen/mainscreen.dart';
 import 'package:onboarding_screen/onoboading.dart';
 
 void main() {
@@ -17,7 +16,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: OnboardingScreen(),
+      home: const OnboardingScreen(),
     );
   }
 }
