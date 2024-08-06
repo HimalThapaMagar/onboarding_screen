@@ -10,6 +10,7 @@ class OnboardingScreen extends StatefulWidget {
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
   PageController _controller = PageController();
+  bool islastPage = false;
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +19,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         children: [
           PageView(
             controller: _controller,
+            onPageChanged: (int page) {
+              if (page == 2) {
+                setState(() {
+                  islastPage = true;
+                });
+              } else {
+                setState(() {
+                  islastPage = false;
+                });
+              }
+            },
             children: [
               Container(
                 color: Colors.red,
@@ -40,45 +52,59 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ],
           ),
           Container(
-              alignment: Alignment(0, 0.8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  //skip button here
-                  TextButton(
-                    onPressed: () {
-                      _controller.animateToPage(2,
-                          duration: Duration(milliseconds: 600),
-                          curve: Curves.easeIn);
-                    },
-                    child: Text(
-                      'Skip',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                      ),
+            alignment: Alignment(0, 0.8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                //skip button here
+                TextButton(
+                  onPressed: () {
+                    _controller.animateToPage(2,
+                        duration: Duration(milliseconds: 600),
+                        curve: Curves.easeIn);
+                  },
+                  child: Text(
+                    'Skip',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
                     ),
                   ),
+                ),
 
-                  SmoothPageIndicator(controller: _controller, count: 3),
+                SmoothPageIndicator(controller: _controller, count: 3),
 
-                  //next button here
-                  TextButton(
-                    onPressed: () {
-                      _controller.nextPage(
-                          duration: Duration(milliseconds: 300),
-                          curve: Curves.linear);
-                    },
-                    child: Text(
-                      'Next',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
+                //next button here
+                islastPage
+                    ? TextButton(
+                        onPressed: () => {
+                          //will add the function to goto main screen page at last
+                        },
+                        child: Text(
+                          'Done',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
+                        ),
+                      )
+                    : TextButton(
+                        onPressed: () {
+                          _controller.nextPage(
+                              duration: Duration(milliseconds: 300),
+                              curve: Curves.linear);
+                        },
+                        child: Text(
+                          'Next',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ],
-              ))
+              ],
+            ),
+          ),
         ],
       ),
     );
