@@ -14,32 +14,70 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(children: [
-        PageView(
-          controller: _controller,
-          children: [
-            Container(
-              color: Colors.red,
-              child: Center(
-                child: Text('Page 1'),
+      body: Stack(
+        children: [
+          PageView(
+            controller: _controller,
+            children: [
+              Container(
+                color: Colors.red,
+                child: Center(
+                  child: Text('Page 1'),
+                ),
               ),
-            ),
-            Container(
-              color: Colors.blue,
-              child: Center(
-                child: Text('Page 2'),
+              Container(
+                color: Colors.blue,
+                child: Center(
+                  child: Text('Page 2'),
+                ),
               ),
-            ),
-            Container(
-              color: Colors.green,
-              child: Center(
-                child: Text('Page 3'),
+              Container(
+                color: Colors.green,
+                child: Center(
+                  child: Text('Page 3'),
+                ),
               ),
-            ),
-          ],
-        ),
-        SmoothPageIndicator(controller: _controller, count: 3)
-      ],
+            ],
+          ),
+          Container(
+              alignment: Alignment(0, 0.8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  //skip button here
+                  TextButton(
+                    onPressed: () {
+                      _controller.jumpToPage(2);
+                    },
+                    child: Text(
+                      'Skip',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+
+                  SmoothPageIndicator(controller: _controller, count: 3),
+
+                  //next button here
+                  TextButton(
+                    onPressed: () {
+                      _controller.nextPage(
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.linear);
+                    },
+                    child: Text(
+                      'Next',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                ],
+              ))
+        ],
       ),
     );
   }
