@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:onboarding_screen/mainscreen.dart';
+import 'package:onboarding_screen/onboarding_screens/onboarding_screen1.dart';
+import 'package:onboarding_screen/onboarding_screens/onboarding_screen2.dart';
+import 'package:onboarding_screen/onboarding_screens/onboarding_screen3.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -31,25 +34,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 });
               }
             },
-            children: [
-              Container(
-                color: Colors.red,
-                child: const Center(
-                  child: Text('Page 1'),
-                ),
-              ),
-              Container(
-                color: Colors.blue,
-                child: const Center(
-                  child: Text('Page 2'),
-                ),
-              ),
-              Container(
-                color: Colors.green,
-                child: const Center(
-                  child: Text('Page 3'),
-                ),
-              ),
+            children: const[
+              OnboardingPage1(),
+              OnboardingPage2(),
+              OnboardingPage3(),
             ],
           ),
           Container(
