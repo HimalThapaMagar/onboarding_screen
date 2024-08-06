@@ -8,7 +8,11 @@ class OnboardingPage1 extends StatelessWidget {
     return const Scaffold(
       backgroundColor: Colors.amberAccent,
       body: Center(
-        child: Text("Page 1"),
+        child: Column(
+          children: [
+            Text("Page 1"),
+          ],
+        ),
       ),
     );
   }
