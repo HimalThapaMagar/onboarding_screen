@@ -47,7 +47,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   //skip button here
                   TextButton(
                     onPressed: () {
-                      _controller.jumpToPage(2);
+                      _controller.animateToPage(2,
+                          duration: Duration(milliseconds: 600),
+                          curve: Curves.easeIn);
                     },
                     child: Text(
                       'Skip',
