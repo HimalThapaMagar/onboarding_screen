@@ -7,7 +7,8 @@ void main() async {
   // runApp(const MyApp());
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  bool seenOnboarding = prefs.getBool('seenOnboarding') ?? false;
+ var seenOnboarding = prefs.getBool('seenOnboarding') ?? false;
+ print(seenOnboarding);
   runApp(MyApp(seenOnboarding: seenOnboarding));
 }
 

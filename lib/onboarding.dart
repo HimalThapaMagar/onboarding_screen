@@ -90,14 +90,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           //       builder: (context) => const MainScreen()),
                           //   (Route<dynamic> route) => false,
                           // ),
-                          if (_controller.page == 2)
-                            {
-                              completeOnboarding(),
-                            }
-                          else
-                            {
-                              nextPage(),
-                            }
+                          completeOnboarding(),
                         },
                         child: const Text(
                           'Done',
