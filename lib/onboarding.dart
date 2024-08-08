@@ -3,6 +3,7 @@ import 'package:onboarding_screen/mainscreen.dart';
 import 'package:onboarding_screen/onboarding_screens/onboarding_screen1.dart';
 import 'package:onboarding_screen/onboarding_screens/onboarding_screen2.dart';
 import 'package:onboarding_screen/onboarding_screens/onboarding_screen3.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -15,6 +16,22 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _controller = PageController();
   bool islastPage = false;
+
+  void completeOnboarding() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('seenOnboarding', true);
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const MainScreen()),
+    );
+  }
+
+  void nextPage() {
+    _controller.nextPage(
+      duration: Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +51,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 });
               }
             },
-            children: const[
+            children: const [
               OnboardingPage1(),
               OnboardingPage2(),
               OnboardingPage3(),
@@ -67,12 +84,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 islastPage
                     ? TextButton(
                         onPressed: () => {
-                          Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const MainScreen()),
-                            (Route<dynamic> route) => false,
-                          ),
+                          // Navigator.pushAndRemoveUntil(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //       builder: (context) => const MainScreen()),
+                          //   (Route<dynamic> route) => false,
+                          // ),
+                          if (_controller.page == 2)
+                            {
+                              completeOnboarding(),
+                            }
+                          else
+                            {
+                              nextPage(),
+                            }
                         },
                         child: const Text(
                           'Done',
